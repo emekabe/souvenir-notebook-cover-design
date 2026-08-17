@@ -133,6 +133,12 @@ function GoldRule({ width = "72%" }: { width?: string }) {
 
 // ─── Front Cover ─────────────────────────────────────────────────────────────
 function FrontCover() {
+  // The cover is 723px tall. The header band is ~97px (crest 52 + text + padding).
+  // Portrait should be ~x% (.0x) of the full cover = tall.
+  // We position it absolutely so it sits behind all other content.
+  const PORTRAIT_HEIGHT = Math.round(723 * 0.84); //
+  const PORTRAIT_WIDTH = Math.round(PORTRAIT_HEIGHT * (3 / 4)); // maintain natural aspect
+
   return (
     <div
       style={{
@@ -145,138 +151,172 @@ function FrontCover() {
         position: "relative",
       }}
     >
-      <HeaderBand showText crestSize={52} />
-
+      {/* Portrait — absolutely placed at the back, no border/circle */}
       <div
         style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "12px 48px 20px",
-          gap: 0,
+          position: "absolute",
+          bottom: 0,
+          left: "76%",
+          transform: "translateX(-50%)",
+          width: PORTRAIT_WIDTH,
+          height: PORTRAIT_HEIGHT,
+          zIndex: 0,
+          pointerEvents: "none",
+          overflow: "hidden",
         }}
       >
-        {/* Circular portrait frame */}
-        <div
+        <ImageWithFallback
+          src={portraitFront}
+          alt="Dr. Mrs. Iyore Evelyn Chukwulobe in LASU doctoral regalia"
           style={{
-            width: 258,
-            height: 258,
-            borderRadius: "50%",
-            border: `2.5px solid ${GOLD}`,
-            outline: `1px solid rgba(196,147,40,0.22)`,
-            outlineOffset: 4,
-            overflow: "hidden",
-            flexShrink: 0,
-            boxShadow: `0 6px 24px rgba(27,43,92,0.18)`,
-          }}
-        >
-          <ImageWithFallback
-            src={portraitFront}
-            alt="Dr. Mrs. Iyore Evelyn Chukwulobe in LASU doctoral regalia"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 14%",
-              display: "block",
-            }}
-          />
-        </div>
-
-        {/* Name & credentials */}
-        <div style={{ textAlign: "center", marginTop: 22, width: "100%" }}>
-          <div
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontWeight: 600,
-              fontSize: 25,
-              color: NAVY,
-              letterSpacing: "0.005em",
-              lineHeight: 1.22,
-            }}
-          >
-            Dr. Mrs. Iyore Evelyn Chukwulobe
-          </div>
-
-          <div
-            style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 11.5,
-              color: INK,
-              letterSpacing: "0.1em",
-              marginTop: 10,
-              opacity: 0.7,
-            }}
-          >
-            BSc.Ed., MEd., TRCN, MSc., PhD
-          </div>
-
-          <div style={{ marginTop: 14, marginBottom: 14 }}>
-            <GoldRule width="60%" />
-          </div>
-
-          <div
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontStyle: "italic",
-              fontSize: 22,
-              color: NAVY,
-              letterSpacing: "0.02em",
-              lineHeight: 1.45,
-              opacity: 0.88,
-            }}
-          >
-            Doctor of Philosophy in Mathematics Education
-          </div>
-        </div>
-
-        {/* Spacer */}
-        <div style={{ flex: 1, minHeight: 16 }} />
-
-        {/* Event details */}
-        <div
-          style={{
-            textAlign: "center",
             width: "100%",
-            borderTop: `1px solid rgba(196,147,40,0.3)`,
-            paddingTop: 18,
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 14%",
+            display: "block",
+          }}
+        />
+      </div>
+
+      {/* All foreground content sits above the portrait via z-index */}
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", height: "100%" }}>
+        <HeaderBand showText crestSize={52} />
+
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "12px 48px 20px",
+            gap: 0,
           }}
         >
+          {/* Congratulations tag */}
           <div
             style={{
               fontFamily: "'Inter', system-ui, sans-serif",
-              fontWeight: 600,
-              fontSize: 11.5,
-              color: NAVY,
-              letterSpacing: "0.07em",
+              fontWeight: 400,
+              fontSize: 14.5,
+              color: GOLD,
+              letterSpacing: "0.35em",
               textTransform: "uppercase",
-              lineHeight: 1.5,
+              opacity: 0.82,
+              marginTop: 22,
+              marginBottom: 8,
+              alignSelf: "flex-start",
             }}
           >
-            PhD Convocation &amp; Certificate Conferment Ceremony
+            Congratulations
           </div>
 
+          {/* Name & credentials — left-aligned within the left 75% column */}
+          <div style={{ marginTop: 22, width: "75%", alignSelf: "flex-start", textAlign: "left" }}>
+            <div
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 600,
+                fontSize: 25,
+                color: NAVY,
+                letterSpacing: "0.005em",
+                lineHeight: 1.22,
+              }}
+            >
+              Dr. Mrs. Iyore Evelyn Chukwulobe
+            </div>
+
+            <div
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 11.5,
+                color: INK,
+                letterSpacing: "0.1em",
+                marginTop: 10,
+                opacity: 0.7,
+              }}
+            >
+              BSc.Ed., MEd., TRCN, MSc., PhD
+            </div>
+
+            <div style={{ marginTop: 14, marginBottom: 14 }}>
+              <div
+                style={{
+                  width: "80%",
+                  height: 1,
+                  background: `linear-gradient(90deg, transparent, ${GOLD} 20%, ${GOLD} 80%, transparent)`,
+                  marginLeft: 0,
+                  opacity: 0.65,
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontStyle: "italic",
+                fontSize: 22,
+                color: NAVY,
+                letterSpacing: "0.02em",
+                lineHeight: 1.45,
+                opacity: 0.88,
+              }}
+            >
+              Doctor of Philosophy in Mathematics Education
+            </div>
+          </div>
+
+          {/* Spacer */}
+          <div style={{ flex: 1, minHeight: 16 }} />
+
+          {/* Event details */}
           <div
             style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 11.5,
-              color: INK,
-              marginTop: 9,
-              letterSpacing: "0.02em",
-              opacity: 0.78,
-              marginBottom: 15
+              textAlign: "center",
+              width: "100%",
+              borderTop: `1px solid rgba(196,147,40,0.3)`,
+              paddingTop: 18,
+              background: "rgba(247, 242, 232, 0.72)",
+              border: `1px solid rgba(27, 43, 92, 0.4)`,
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+              borderRadius: 6,
+              paddingLeft: 12,
+              paddingRight: 12,
             }}
           >
-            Wednesday, August 19, 2026
+            <div
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontWeight: 600,
+                fontSize: 11.5,
+                color: NAVY,
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                lineHeight: 1.5,
+              }}
+            >
+              PhD Convocation &amp; Certificate Conferment Ceremony
+            </div>
+
+            <div
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 11.5,
+                color: INK,
+                marginTop: 9,
+                letterSpacing: "0.02em",
+                opacity: 0.78,
+                marginBottom: 15,
+              }}
+            >
+              Wednesday, August 19, 2026
+            </div>
           </div>
 
-
-        </div>
-
-        {/* Bottom decoration */}
-        <div style={{ marginTop: 18 }}>
-          <LaurelDecoration />
+          {/* Bottom decoration */}
+          <div style={{ marginTop: 18 }}>
+            <LaurelDecoration />
+          </div>
         </div>
       </div>
     </div>

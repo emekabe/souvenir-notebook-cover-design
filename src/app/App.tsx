@@ -153,15 +153,15 @@ function FrontCover() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "28px 48px 20px",
+          padding: "12px 48px 20px",
           gap: 0,
         }}
       >
         {/* Circular portrait frame */}
         <div
           style={{
-            width: 218,
-            height: 218,
+            width: 258,
+            height: 258,
             borderRadius: "50%",
             border: `2.5px solid ${GOLD}`,
             outline: `1px solid rgba(196,147,40,0.22)`,
@@ -327,7 +327,7 @@ function BackCover() {
         <div
           style={{
             width: "100%",
-            height: 210,
+            height: 280,
             borderRadius: 6,
             border: `2px solid ${GOLD}`,
             boxShadow: `0 4px 18px rgba(27,43,92,0.16)`,
@@ -342,7 +342,7 @@ function BackCover() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "center 8%",
+              objectPosition: "center 18%",
               display: "block",
             }}
           />
@@ -377,8 +377,8 @@ function BackCover() {
               src={backImage2}
               alt="Celebration moment — 2nd image"
               style={{
-                width: "100%",
-                height: "100%",
+                width: "150%",
+                height: "150%",
                 objectFit: "cover",
                 objectPosition: "center center",
                 display: "block",

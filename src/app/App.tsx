@@ -1,5 +1,8 @@
 import portraitFront from "@/imports/IMG_2323.JPG.jpeg";
 import portraitBack from "@/imports/IMG_2321.JPG.jpeg";
+import backImage2 from "@/imports/2nd back cover image IMG_2324.JPG.jpeg";
+import backImage3 from "@/imports/3rd back cover image IMG_2325.JPG.jpeg";
+import lasuCrest from "@/imports/lasu_crest.png";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 const NAVY = "#1B2B5C";
@@ -7,59 +10,14 @@ const GOLD = "#C49328";
 const CREAM = "#F7F2E8";
 const INK = "#1A1A1A";
 
-// ─── LASU Crest ──────────────────────────────────────────────────────────────
-function LasuCrest({ size = 44, onDark = false }: { size?: number; onDark?: boolean }) {
-  const c = onDark ? CREAM : NAVY;
-  const g = GOLD;
-  const h = Math.round(size * 1.22);
-
+// ─── LASU Crest (real PNG) ────────────────────────────────────────────────────
+function LasuCrest({ size = 44 }: { size?: number; onDark?: boolean }) {
   return (
-    <svg width={size} height={h} viewBox="0 0 60 73" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Torch flame — sits above shield */}
-      <path
-        d="M31 13 C28 9 27 5 29 2 C30 5 32 5 33 3 C35 1 36 5 35 8 C34 11 32 13 31 13 Z"
-        stroke={g} strokeWidth="0.85" strokeLinejoin="round"
-      />
-      {/* Torch handle */}
-      <rect x="29.5" y="13" width="3" height="5" rx="0.4" stroke={c} strokeWidth="0.75" />
-
-      {/* Shield outline */}
-      <path
-        d="M6 16 L54 16 L54 50 Q54 68 30 72 Q6 68 6 50 Z"
-        stroke={c} strokeWidth="1.5" strokeLinejoin="round"
-      />
-
-      {/* Open book — upper quadrant of shield */}
-      <g transform="translate(10, 22)">
-        {/* Left page */}
-        <path
-          d="M20 1 C14 2 7 2 0 3 L0 20 C7 20 14 19 20 18 Z"
-          stroke={c} strokeWidth="0.95"
-        />
-        {/* Right page */}
-        <path
-          d="M20 1 C26 2 33 2 40 3 L40 20 C33 20 26 19 20 18 Z"
-          stroke={c} strokeWidth="0.95"
-        />
-        {/* Spine */}
-        <line x1="20" y1="1" x2="20" y2="18" stroke={c} strokeWidth="1.25" />
-        {/* Page rules — left */}
-        <line x1="3" y1="8"  x2="17" y2="8"  stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-        <line x1="3" y1="12" x2="17" y2="12" stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-        <line x1="3" y1="16" x2="17" y2="16" stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-        {/* Page rules — right */}
-        <line x1="23" y1="8"  x2="37" y2="8"  stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-        <line x1="23" y1="12" x2="37" y2="12" stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-        <line x1="23" y1="16" x2="37" y2="16" stroke={c} strokeWidth="0.45" strokeOpacity="0.6" />
-      </g>
-
-      {/* Water waves — lower quadrant */}
-      <g transform="translate(8, 46)">
-        <path d="M0 4 Q6 1 12 4 Q18 7 24 4 Q30 1 36 4 Q42 7 44 4" stroke={c} strokeWidth="0.85" />
-        <path d="M0 8 Q6 5 12 8 Q18 11 24 8 Q30 5 36 8 Q42 11 44 8" stroke={c} strokeWidth="0.85" />
-        <path d="M0 12 Q6 9 12 12 Q18 15 24 12 Q30 9 36 12 Q42 15 44 12" stroke={c} strokeWidth="0.85" />
-      </g>
-    </svg>
+    <img
+      src={lasuCrest}
+      alt="LASU Crest"
+      style={{ width: size, height: "auto", display: "block", objectFit: "contain" }}
+    />
   );
 }
 
@@ -109,7 +67,7 @@ function LaurelDecoration() {
 }
 
 // ─── Shared Header Band ──────────────────────────────────────────────────────
-function HeaderBand({ showText = true, crestSize = 38 }: { showText?: boolean; crestSize?: number }) {
+function HeaderBand({ showText = false, crestSize = 52 }: { showText?: boolean; crestSize?: number }) {
   return (
     <div
       style={{
@@ -119,11 +77,11 @@ function HeaderBand({ showText = true, crestSize = 38 }: { showText?: boolean; c
         alignItems: "center",
         justifyContent: "center",
         gap: 5,
-        padding: showText ? "10px 24px 11px" : "8px 24px",
+        padding: showText ? "10px 24px 13px" : "10px 24px 12px",
         flexShrink: 0,
       }}
     >
-      <LasuCrest size={crestSize} onDark />
+      <LasuCrest size={crestSize} />
       {showText && (
         <>
           <div
@@ -187,7 +145,7 @@ function FrontCover() {
         position: "relative",
       }}
     >
-      <HeaderBand showText crestSize={38} />
+      <HeaderBand showText crestSize={52} />
 
       <div
         style={{
@@ -351,7 +309,7 @@ function BackCover() {
         position: "relative",
       }}
     >
-      <HeaderBand showText={false} crestSize={34} />
+      <HeaderBand crestSize={44} />
 
       <div
         style={{
@@ -359,21 +317,22 @@ function BackCover() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "34px 60px 24px",
+          padding: "20px 32px 16px",
+          gap: 0,
         }}
       >
-        {/* Rectangular portrait frame */}
+        {/* ── Triptych: three framed images ── */}
+
+        {/* Top image — large, full-width hero */}
         <div
           style={{
-            width: 262,
-            height: 198,
+            width: "100%",
+            height: 210,
             borderRadius: 6,
             border: `2px solid ${GOLD}`,
-            outline: `1px solid rgba(196,147,40,0.2)`,
-            outlineOffset: 4,
+            boxShadow: `0 4px 18px rgba(27,43,92,0.16)`,
             overflow: "hidden",
             flexShrink: 0,
-            boxShadow: `0 4px 20px rgba(27,43,92,0.14)`,
           }}
         >
           <ImageWithFallback
@@ -389,13 +348,76 @@ function BackCover() {
           />
         </div>
 
+        {/* Gold rule separator */}
+        <div style={{ margin: "12px 0" }}>
+          <GoldRule width="100%" />
+        </div>
+
+        {/* Bottom two images side by side */}
+        <div
+          style={{
+            display: "flex",
+            gap: 12,
+            width: "100%",
+            flexShrink: 0,
+          }}
+        >
+          {/* 2nd image */}
+          <div
+            style={{
+              flex: 1,
+              height: 172,
+              borderRadius: 6,
+              border: `2px solid ${GOLD}`,
+              boxShadow: `0 4px 14px rgba(27,43,92,0.12)`,
+              overflow: "hidden",
+            }}
+          >
+            <ImageWithFallback
+              src={backImage2}
+              alt="Celebration moment — 2nd image"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                display: "block",
+              }}
+            />
+          </div>
+
+          {/* 3rd image */}
+          <div
+            style={{
+              flex: 1,
+              height: 172,
+              borderRadius: 6,
+              border: `2px solid ${GOLD}`,
+              boxShadow: `0 4px 14px rgba(27,43,92,0.12)`,
+              overflow: "hidden",
+            }}
+          >
+            <ImageWithFallback
+              src={backImage3}
+              alt="Celebration moment — 3rd image"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+
         {/* Closing message */}
-        <div style={{ textAlign: "center", marginTop: 34, width: "100%" }}>
+        <div style={{ textAlign: "center", marginTop: 18, width: "100%" }}>
           <div
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontWeight: 600,
-              fontSize: 21,
+              fontSize: 18,
               color: NAVY,
               lineHeight: 1.3,
               letterSpacing: "0.01em",
@@ -408,10 +430,10 @@ function BackCover() {
             style={{
               fontFamily: "'Inter', system-ui, sans-serif",
               fontWeight: 300,
-              fontSize: 12.5,
+              fontSize: 11.5,
               color: INK,
-              marginTop: 14,
-              lineHeight: 1.75,
+              marginTop: 10,
+              lineHeight: 1.7,
               opacity: 0.72,
               letterSpacing: "0.01em",
             }}
@@ -435,7 +457,7 @@ function BackCover() {
               color: NAVY,
               letterSpacing: "0.13em",
               textTransform: "uppercase",
-              marginTop: 14,
+              marginTop: 12,
               lineHeight: 1.5,
             }}
           >
@@ -462,14 +484,14 @@ function BackCover() {
               fontSize: 10.5,
               color: INK,
               letterSpacing: "0.04em",
-              marginTop: 8,
+              marginTop: 7,
               opacity: 0.5,
             }}
           >
             August 19, 2026
           </div>
 
-          <div style={{ height: 28 }} />
+          <div style={{ height: 20 }} />
         </div>
       </div>
     </div>

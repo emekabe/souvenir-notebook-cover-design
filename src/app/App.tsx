@@ -1,8 +1,14 @@
+// @ts-ignore
 import portraitFront from "@/imports/IMG_2323.JPG.png";
+// @ts-ignore
 import portraitBack from "@/imports/IMG_2321.JPG.jpeg";
+// @ts-ignore
 import backImage2 from "@/imports/2nd back cover image IMG_2324.JPG.jpeg";
+// @ts-ignore
 import backImage3 from "@/imports/3rd back cover image IMG_2325.JPG.jpeg";
+// @ts-ignore
 import lasuCrest from "@/imports/lasu_crest.png";
+// @ts-ignore
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 const NAVY = "#1B2B5C";

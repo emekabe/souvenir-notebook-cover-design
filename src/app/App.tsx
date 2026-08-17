@@ -1,4 +1,4 @@
-import portraitFront from "@/imports/IMG_2323.JPG.jpeg";
+import portraitFront from "@/imports/IMG_2323.JPG.png";
 import portraitBack from "@/imports/IMG_2321.JPG.jpeg";
 import backImage2 from "@/imports/2nd back cover image IMG_2324.JPG.jpeg";
 import backImage3 from "@/imports/3rd back cover image IMG_2325.JPG.jpeg";

@@ -265,25 +265,13 @@ function FrontCover() {
               marginTop: 9,
               letterSpacing: "0.02em",
               opacity: 0.78,
+              marginBottom: 15
             }}
           >
-            Wednesday, August 19, 2026&ensp;&middot;&ensp;10:00 AM Prompt
+            Wednesday, August 19, 2026
           </div>
 
-          <div
-            style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 11,
-              color: INK,
-              marginTop: 6,
-              lineHeight: 1.55,
-              opacity: 0.65,
-              maxWidth: 370,
-              margin: "6px auto 0",
-            }}
-          >
-            Buba Marwa Auditorium, Lagos State University (LASU), Ojo, Lagos
-          </div>
+
         </div>
 
         {/* Bottom decoration */}
